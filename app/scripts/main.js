@@ -50,11 +50,11 @@ $(function(){
       console.log(current[0]);
       console.log(forecast[0]);
       var cityName = current[0].name;
-      var currentTemp = current[0].main.temp;
+      var currentTemp = parseInt(current[0].main.temp);
       var currentCondition = current[0].weather[0].description;
       var hourlyForecasts = forecast[0].list;
 
-      // populateForecast();
+      populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts);
     });
 
   }
@@ -65,6 +65,16 @@ $(function(){
 
   function populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts) {
     // update markup with data from open weather api json response
+    $('#city').text(cityName);
+    $('#current-temp').text(currentTemp);
+    $('#current-conditions').text(currentCondition);
+    $( "#forecast-temps td" ).each(function(i) {
+      $(this).text(parseInt(hourlyForecasts[i].main.temp));
+    });
+    $( "#forecast-icons td" ).each(function(i) {
+      $(this).text(hourlyForecasts[i].weather[0].icon);
+    });
+    $('#updated').text(new Date());
   }
 
 

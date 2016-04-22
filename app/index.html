@@ -38,8 +38,8 @@
       <p><a href="#">Not here?</a></p>
     </header>
     <section id="forecast" class="main">
-      <h1>68&deg;</h1>
-      <h2>Overcast</h2>
+      <h1><span id="current-temp">68</span>&deg;</h1>
+      <h2><span id="current-conditions">Overcast</span></h2>
      <table id="forecast-table">
       <thead>
         <tr>
@@ -55,27 +55,25 @@
       </thead>
       <tfoot>
         <tr>
-          <td colspan="3">Last Update <span id="updated">2016-04-21</span></td>
+          <td colspan="8" class="small"><em>Updated <span id="updated">Never</span></em></td>
         </tr>
       </tfoot>
       <tbody>
-        <tr>
+        <tr id="forecast-temps">
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Dolor</td>
-          <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
         </tr>
-        <tr>
+        <tr id="forecast-icons">
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Dolor</td>
-          <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
           <td>Ipsum</td>
