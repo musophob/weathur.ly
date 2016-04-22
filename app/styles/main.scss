@@ -129,6 +129,16 @@ body > header {
   }
 }
 
+#forecast > * {
+  display: none;
+}
+
+#forecast > .loading {
+  display: block;
+  margin: 0 auto;
+  width: 64px;
+}
+
 /* sms section */
 
 #sms {

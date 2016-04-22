@@ -1,11 +1,16 @@
 $(function(){
 
+// call up the weather on page load
+
+  getForecast();
+
+
 // Weather-based functionality
 
   function getForecast(zip) {
-
     if (zip) {
       getWeatherData("zip", {zip: zip});
+      showPopulatedMarkup();
       return false;
     } else if (!navigator.geolocation){
       console.log("we don't have geo location");
@@ -18,7 +23,6 @@ $(function(){
       var longitude = position.coords.longitude;
       console.log(latitude + " " + longitude)
       getWeatherData("coordinates", {"latitude": latitude, "longitude": longitude});
-      showLocationInfo();
     };
 
     function error() {
@@ -71,7 +75,7 @@ $(function(){
       var hourlyForecasts = forecast[0].list;
 
       populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts);
-      showLocationInfo();
+      showPopulatedMarkup();
     });
 
   }
@@ -153,21 +157,21 @@ $(function(){
     $('#updated').text(new Date());
   }
 
-  // call up the weather on page load
-  getForecast();
-
 // dynamic elements
 
   function showZipInput() {
     // show input where user can enter their zip code to get the forecast
     $('#location-found').hide();
+    $('.loading').hide();
     $('#location-needed').show();
   }
 
-  function showLocationInfo() {
+  function showPopulatedMarkup() {
     // show input where user can enter their zip code to get the forecast
     $('#location-needed').hide();
+    $('.loading').hide();
     $('#location-found').show();
+    $('#forecast > *:not(.loading)').show();
   }
 
   $('#location-wrong').on("click", function(e) {
