@@ -1,11 +1,13 @@
 $(function(){
 
-  function getForecast() {
+  function getForecast(zip) {
 
-    if (!navigator.geolocation){
+    if (zip) {
+      getWeatherData("zip", {zip: zip});
+      return false;
+    } else if (!navigator.geolocation){
       console.log("we don't have geo location");
-      // triggerZipInput()
-      getWeatherData("zip", {zip: "94596"});
+      showZipInput()
       return false;
     }
 
@@ -14,12 +16,12 @@ $(function(){
       var longitude = position.coords.longitude;
       console.log(latitude + " " + longitude)
       getWeatherData("coordinates", {"latitude": latitude, "longitude": longitude});
+      showLocationInfo();
     };
 
     function error() {
       console.log("geo location error or blocked");
-      // triggerZipInput()
-      getWeatherData("zip", {zip: "94596"});
+      showZipInput()
       return false;
     };
 
@@ -56,7 +58,7 @@ $(function(){
     $.when(theWeatherNow, theWeatherToday).done(function(current, forecast) {
       if (current[0].cod != "200" || forecast[0].cod != "200") {
         console.log("unable to communicate with open weather map api: " + current.cod);
-        // triggerZipInput()
+        showZipInput()
         return false;
       }
       console.log(current[0]);
@@ -67,6 +69,7 @@ $(function(){
       var hourlyForecasts = forecast[0].list;
 
       populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts);
+      showLocationInfo();
     });
 
   }
@@ -143,9 +146,29 @@ $(function(){
   }
 
 
-  function triggerZipInput() {
-    // create an input where user can enter their zip code to get the forecast
+  function showZipInput() {
+    // show input where user can enter their zip code to get the forecast
+    $('#location-found').hide();
+    $('#location-needed').show();
   }
+
+  function showLocationInfo() {
+    // show input where user can enter their zip code to get the forecast
+    $('#location-needed').hide();
+    $('#location-found').show();
+  }
+
+  $('#location-wrong').on("click", function(e) {
+    e.preventDefault();
+    showZipInput();
+  })
+
+  $('#location-needed form').submit(function(e) {
+    e.preventDefault();
+    // this should be done only if zip is valid:
+    getForecast($('#zip').val());
+  });
+
 
   getForecast();
 });

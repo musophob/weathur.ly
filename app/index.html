@@ -33,13 +33,21 @@
 
     <header class="main">
       <img id="logo-main" src="/images/weathurly_logo.png" alt="Weathur.ly Logo">
-      <p>We found you in</p>
-      <p id="city" class="lead">San Francisco, CA</p>
-      <p><a href="#">Not here?</a></p>
+      <div id="location-found">
+        <p>We found you in</p>
+        <p id="city" class="lead"></p>
+        <p><a id="location-wrong" href="#">Not here?</a></p>
+      </div>
+      <div id="location-needed">
+        <form action="#" id="zip-form">
+          <input type="text" id="zip" name="zip" placeholder="Enter your zip code">
+          <input type="submit" value="Go">
+        </form>
+      </div>
     </header>
     <section id="forecast" class="main">
-      <h1><span id="current-temp">68</span>&deg;</h1>
-      <h2><span id="current-conditions">Overcast</span></h2>
+      <h1><span id="current-temp"></span>&deg;</h1>
+      <h2><span id="current-conditions"></span></h2>
      <table id="forecast-table">
       <thead>
         <tr>
@@ -60,14 +68,14 @@
       </tfoot>
       <tbody>
         <tr id="forecast-temps">
-          <td>Ipsum</td>
-          <td>Ipsum</td>
-          <td>Ipsum</td>
-          <td>Dolor</td>
-          <td>Ipsum</td>
-          <td>Ipsum</td>
-          <td>Ipsum</td>
-          <td>Ipsum</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr id="forecast-icons">
           <td><span class="meteocon" data-icon="'"></span></td>
