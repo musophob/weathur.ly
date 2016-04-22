@@ -4,6 +4,13 @@ $icon-font-path: '../fonts/';
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+// set some vars
+$color-primary: #8ed0e7;
+$color-secondary: #f7c14b;
+$color-dark: #2a2a32;
+$color-light: #aaa;
+$vert-spacing-size: 3rem;
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -11,3 +18,61 @@ $icon-font-path: '../fonts/';
   padding: 0.2em 0;
 }
 
+/* global */
+
+body {
+  background-color: $color-dark;
+  color: $color-light;
+  a {
+    text-decoration: underline;
+    color: $color-light;
+  }
+  .main {
+    padding: $vert-spacing-size 10%;
+  }
+}
+
+/* header section */
+
+body > header {
+  text-align: center;
+  #logo-main {
+    max-width: 193px;
+    margin-bottom: $vert-spacing-size;
+  }
+  #city {
+    color: $color-primary;
+  }
+
+}
+/* forecast section */
+
+#forecast {
+  background-color: #fff;
+  color: #222;
+  text-align: center;
+  #forecast-table {
+    margin: 0 auto;
+  }
+}
+
+/* sms section */
+
+#sms {
+  text-align: center;
+  #sms-form {
+    input {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+
+/* footer section */
+
+body > footer {
+  text-align: center;
+  #logo-sub {
+    max-width: 98px;
+  }
+}

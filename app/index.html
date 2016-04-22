@@ -28,16 +28,16 @@
     <![endif]-->
 
 
-    <header>
-      <img src="/images/weathurly_logo.png" alt="Weathur.ly Logo">
+    <header class="main">
+      <img id="logo-main" src="/images/weathurly_logo.png" alt="Weathur.ly Logo">
       <p>We found you in</p>
-      <p id="city">San Francisco, CA</p>
+      <p id="city" class="lead">San Francisco, CA</p>
       <p><a href="#">Not here?</a></p>
     </header>
-    <section id="forecast">
+    <section id="forecast" class="main">
       <h1>68&deg;</h1>
       <h2>Overcast</h2>
-     <table>
+     <table id="forecast-table">
       <thead>
         <tr>
           <th scope="col">12a</th>
@@ -81,15 +81,15 @@
       </tbody>
     </table>
     </section>
-    <section id="sms">
-      <p>Register for SMS alerts for this location</p>
+    <section id="sms" class="main">
+      <p class="lead">Register for SMS alerts for this location</p>
       <form action="#" id="sms-form">
         <input type="text" name="phone" id="phone" placeholder="555-555-555">
         <input type="submit" value="submit">
       </form>
     </section>
-    <footer>
-      <img src="/images/weathurly_logo_grey.png" alt="Weathur.ly Logo">
+    <footer class="main">
+      <img id="logo-sub" src="/images/weathurly_logo_grey.png" alt="Weathur.ly Logo">
     </footer>
 
 
