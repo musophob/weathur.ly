@@ -32,69 +32,79 @@
 
 
     <header class="main">
-      <img id="logo-main" src="/images/weathurly_logo.png" alt="Weathur.ly Logo">
+      <a href="/"><img id="logo-main" src="/images/weathurly_logo.png" alt="Weathur.ly Logo"></a>
       <div id="location-found">
         <p>We found you in</p>
-        <p id="city" class="lead"></p>
+        <p id="city"></p>
         <p><a id="location-wrong" href="#">Not here?</a></p>
       </div>
       <div id="location-needed">
         <form action="#" id="zip-form">
-          <input type="text" id="zip" name="zip" placeholder="Enter your zip code">
-          <input type="submit" value="Go">
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg" type="text" id="zip" name="zip" placeholder="Enter your zip code">
+          </fieldset>
+          <fieldset class="form-group">
+            <button type="submit" class="btn btn-large btn-info">Search</button>
+          </fieldset>
         </form>
       </div>
     </header>
     <section id="forecast" class="main">
       <h1><span id="current-temp"></span>&deg;</h1>
       <h2><span id="current-conditions"></span></h2>
-     <table id="forecast-table">
-      <thead>
-        <tr>
-          <th scope="col">12a</th>
-          <th scope="col">3a</th>
-          <th scope="col">6a</th>
-          <th scope="col">9a</th>
-          <th scope="col">12p</th>
-          <th scope="col">3p</th>
-          <th scope="col">6p</th>
-          <th scope="col">9p</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <td colspan="8" class="small"><em>Updated <span id="updated">Never</span></em></td>
-        </tr>
-      </tfoot>
-      <tbody>
-        <tr id="forecast-temps">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr id="forecast-icons">
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-          <td><span class="meteocon" data-icon="'"></span></td>
-        </tr>
-      </tbody>
-    </table>
+        <div class="table-responsive">
+         <table id="forecast-table" class="table table-condensed">
+         <thead>
+           <tr>
+             <th scope="col">12a</th>
+             <th scope="col">3a</th>
+             <th scope="col">6a</th>
+             <th scope="col">9a</th>
+             <th scope="col">12p</th>
+             <th scope="col">3p</th>
+             <th scope="col">6p</th>
+             <th scope="col">9p</th>
+           </tr>
+         </thead>
+         <tfoot>
+           <tr>
+             <td colspan="8" class="small"><em>Updated <span id="updated">Never</span></em></td>
+           </tr>
+         </tfoot>
+         <tbody>
+           <tr id="forecast-temps">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="forecast-icons">
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+             <td><span class="meteocon" data-icon="'"></span></td>
+           </tr>
+         </tbody>
+        </table>
+      </div>
     </section>
     <section id="sms" class="main">
       <p class="lead">Register for SMS alerts for this location</p>
       <form action="#" id="sms-form">
-        <input type="text" name="phone" id="phone" placeholder="555-555-555">
-        <input type="submit" value="submit">
+        <fieldset class="form-group">
+          <input class="form-control form-control-lg" type="text" name="phone" id="phone" placeholder="555-555-555">
+        </fieldset>
+        <fieldset class="form-group">
+          <button type="submit" class="btn btn-large btn-info">Get Alerts</button>
+        </fieldset>
       </form>
     </section>
     <footer class="main">
