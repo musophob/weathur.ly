@@ -11,7 +11,7 @@ $(function(){
       var latitude  = position.coords.latitude;
       var longitude = position.coords.longitude;
       console.log(latitude + " " + longitude)
-      // getWeatherByCoords(latitude, longitude)
+      getWeatherByCoords(latitude, longitude)
     };
 
     function error() {
@@ -21,6 +21,40 @@ $(function(){
 
     navigator.geolocation.getCurrentPosition(success, error);
 
+  }
+
+  function getWeatherByCoords(latitude, longitude) {
+
+    // http://api.openweathermap.org/data/2.5/forecast?APPID=91e1db0bd8f7a77a2c6e3d7f4e34b73b&lat=35&lon=139&cnt=8
+    var promise = $.getJSON("http://api.openweathermap.org/data/2.5/forecast", {
+      appid: "91e1db0bd8f7a77a2c6e3d7f4e34b73b",
+      lat: latitude,
+      lon: longitude,
+      cnt: 8 // because we need all of the 3 hr blocks for the current day
+    });
+
+    promise.done(function(data) {
+      console.log(data);
+      // populateForecast();
+    });
+
+    promise.fail(function() {
+      console.log("unable to communicate with open weather map api");
+      // triggerZipInput()
+    });
+  }
+
+  function getWeatherByZip(data) {
+    // like `getWeatherByCoords()`, but with a zip code
+  }
+
+  function populateForecast(data) {
+    // update markup with data from open weather api json response
+  }
+
+
+  function triggerZipInput() {
+    // create an input where user can enter their zip code to get the forecast
   }
 
   getForecast();
