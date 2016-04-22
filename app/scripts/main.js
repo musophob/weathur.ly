@@ -78,7 +78,7 @@ $(function(){
 
   function populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts) {
     // update markup with data from open weather api json response
-    $('#city').text(cityName);
+    $('#city span').text(cityName);
     $('#current-temp').text(currentTemp);
     $('#current-conditions').text(currentCondition);
     $( "#forecast-temps td" ).each(function(i) {
