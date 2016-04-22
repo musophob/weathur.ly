@@ -1,5 +1,7 @@
 $(function(){
 
+// Weather-based functionality
+
   function getForecast(zip) {
 
     if (zip) {
@@ -145,6 +147,10 @@ $(function(){
     $('#updated').text(new Date());
   }
 
+  // call up the weather on page load
+  getForecast();
+
+// dynamic elements
 
   function showZipInput() {
     // show input where user can enter their zip code to get the forecast
@@ -162,6 +168,9 @@ $(function(){
     e.preventDefault();
     showZipInput();
   })
+
+
+  // Forms, validation
 
   $("#location-needed form").validate({
       rules: {
@@ -200,12 +209,87 @@ $(function(){
       },
       submitHandler: function(form, e) {
         e.preventDefault();
-        console.log($('#phone').val());
+        TwilioSMS.sendMessage(
+          $('#phone').val(), // Recipient's number
+          '+19252939327', // Twilio account phone number
+          'Hey There! Here\'s a top secret weathur.ly project for your eyes only: http://dev.to/rly?ref=producthunt',
+
+          function ok() {
+            alert("Message sent!");
+          },
+          function fail() {
+            var letterFromTheEditor = `
+We here at Weathur.ly are way to frugal to pay for an SMS service. If you want proof that we really could send an SMS if we wanted to, follow these steps:
+
+1. Go to https://twilio.com/user/account/phone-numbers/verified
+2. Log in with user: twilio@sean.sh and pw: beQM8s)3CxkB
+3. Verify your phone number with Twilio
+4. Come back to this website and try subscribing to SMS alerts one last time
+
+We reccomend you remove your number from the demo account once you believe in us, what with the password being public and all.
+
+Best,
+
+-Weathur.ly Sr. Security Architect (Fmr)
+`
+            alert("Doh!\n" + letterFromTheEditor);
+          }
+        );
       }
     });
 
 
-  getForecast();
+
+  // Twilio module a la https://bountify.co/twilio-javascript-sms-solution#answer_1567
+
+  var TwilioSMS = (function($) {
+
+    var accountSid = 'AC7ffe26c73bf5f7c9c837a75be2f5e499'; // replace with your account SID
+    var authToken = '18dc027f4f4add343bd8a9f9dc927f9e'; // replace with your auth token
+
+    var testEndpoint = 'https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json';
+    var liveEndpoint = 'https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json';
+
+    var sendMessage = function(to, from, body, successCallback, failCallback) {
+      var data = {
+        To: to,
+        From: from,
+        Body: body
+      };
+
+      $.ajax({
+        method: 'POST',
+        url: testEndpoint,
+        //url: liveEndpoint, // uncomment this in production and comment the above line
+        data: data,
+        dataType: 'json',
+        contentType: 'application/x-www-form-urlencoded', // !
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization",
+            "Basic " + btoa(accountSid + ":" + authToken) // !
+          );
+        },
+        success: function(data) {
+          console.log("Got response: %o", data);
+
+          if (typeof successCallback == 'function')
+            successCallback(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Request failed: " + textStatus + ", " + errorThrown);
+
+          if (typeof failCallback == 'function')
+            failCallback(jqXHR, textStatus, errorThrown);
+        }
+      });
+    }
+
+    return {
+      sendMessage: sendMessage
+    };
+
+  })(jQuery);
+
 });
 
 
