@@ -1,10 +1,10 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="eng">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>weathur ly</title>
+    <title>Weathur.ly - Today's forecast, right as rain.</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -17,7 +17,7 @@
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -26,60 +26,89 @@
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">weathur ly</h3>
-      </div>
 
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-      </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-          
-          <h4>Sass</h4>
-          <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
-          
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-          <h4>Modernizr</h4>
-          <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-          
-        </div>
-      </div>
+    <header>
+      <img src="logo-main" alt="Weathur.ly Logo">
+      <p>We found you in</p>
+      <p id="city">San Francisco, CA</p>
+      <p><a href="#">Not here?</a></p>
+    </header>
+    <section id="forecast">
+      <h1>68&deg;</h1>
+      <h2>Overcast</h2>
+     <table>
+      <thead>
+        <tr>
+          <th scope="col">12a</th>
+          <th scope="col">3a</th>
+          <th scope="col">6a</th>
+          <th scope="col">9a</th>
+          <th scope="col">12p</th>
+          <th scope="col">3p</th>
+          <th scope="col">6p</th>
+          <th scope="col">9p</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3">Last Update <span id="updated">2016-04-21</span></td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Dolor</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+        </tr>
+        <tr>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Dolor</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+          <td>Ipsum</td>
+        </tr>
+      </tbody>
+    </table>
+    </section>
+    <section id="sms">
+      <p>Register for SMS alerts for this location</p>
+      <form action="#" id="sms-form">
+        <input type="text" name="phone" id="phone" placeholder="555-555-555">
+        <input type="submit" value="submit">
+      </form>
+    </section>
+    <footer>
+      <img src="logo-footer" alt="Weathur.ly Logo">
+    </footer>
 
-      <div class="footer">
-        <p>♥ from the Yeoman team</p>
-      </div>
-    </div>
-    
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
+    <!-- <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='https://www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
+    </script> -->
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/plugins.js -->
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
@@ -94,7 +123,7 @@
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
