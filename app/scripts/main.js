@@ -183,7 +183,7 @@ $(function(){
       },
       messages: {
         zip: {
-          required: "We need your zip code because geolocation is available",
+          required: "We need your zip code because geolocation is not available",
           minlength: "Please enter a valid zip code"
         }
       },
