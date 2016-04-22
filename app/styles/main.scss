@@ -71,6 +71,9 @@ body > header {
   text-align: center;
   #forecast-table {
     margin: 0 auto;
+    .meteocon {
+      font-size: 3rem;
+    }
   }
 }
 
