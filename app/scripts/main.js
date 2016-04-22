@@ -25,30 +25,45 @@ $(function(){
 
   function getWeatherByCoords(latitude, longitude) {
 
-    // http://api.openweathermap.org/data/2.5/forecast?APPID=91e1db0bd8f7a77a2c6e3d7f4e34b73b&lat=35&lon=139&cnt=8
-    var promise = $.getJSON("http://api.openweathermap.org/data/2.5/forecast", {
+    // cache the api response with the current weather conditions
+    var theWeatherNow = $.getJSON("http://api.openweathermap.org/data/2.5/weather", {
       appid: "91e1db0bd8f7a77a2c6e3d7f4e34b73b",
       lat: latitude,
       lon: longitude,
+      units: "imperial"
+    });
+    // cache the api response with the whole day's weather
+    var theWeatherForecast = $.getJSON("http://api.openweathermap.org/data/2.5/forecast", {
+      appid: "91e1db0bd8f7a77a2c6e3d7f4e34b73b",
+      lat: latitude,
+      lon: longitude,
+      units: "imperial",
       cnt: 8 // because we need all of the 3 hr blocks for the current day
     });
 
-    promise.done(function(data) {
-      console.log(data);
+    $.when(theWeatherNow, theWeatherForecast).done(function(current, forecast) {
+      if (current[0].cod != "200" || forecast[0].cod != "200") {
+        console.log("unable to communicate with open weather map api: " + current.cod);
+        // triggerZipInput()
+        return false;
+      }
+      console.log(current[0]);
+      console.log(forecast[0]);
+      var cityName = current[0].name;
+      var currentTemp = current[0].main.temp;
+      var currentCondition = current[0].weather[0].description;
+      var hourlyForecasts = forecast[0].list;
+
       // populateForecast();
     });
 
-    promise.fail(function() {
-      console.log("unable to communicate with open weather map api");
-      // triggerZipInput()
-    });
   }
 
   function getWeatherByZip(data) {
     // like `getWeatherByCoords()`, but with a zip code
   }
 
-  function populateForecast(data) {
+  function populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts) {
     // update markup with data from open weather api json response
   }
 
