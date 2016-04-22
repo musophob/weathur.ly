@@ -142,7 +142,13 @@ $(function(){
           apicon = "K";
           break;
       }
-      $(this).attr("data-icon", apicon);
+      $(this).attr({
+        "data-icon": apicon,
+        "title": hourlyForecasts[i].weather[0].description,
+        "data-toggle": "tooltip",
+        "data-placement": "bottom"
+      });
+      $(this).tooltip();
     });
     $('#updated').text(new Date());
   }
