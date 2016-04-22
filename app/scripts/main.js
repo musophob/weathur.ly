@@ -4,6 +4,8 @@ $(function(){
 
     if (!navigator.geolocation){
       console.log("we don't have geo location");
+      // triggerZipInput()
+      getWeatherData("zip", {zip: "94596"});
       return false;
     }
 
@@ -11,37 +13,47 @@ $(function(){
       var latitude  = position.coords.latitude;
       var longitude = position.coords.longitude;
       console.log(latitude + " " + longitude)
-      getWeatherByCoords(latitude, longitude)
+      getWeatherData("coordinates", {"latitude": latitude, "longitude": longitude});
     };
 
     function error() {
       console.log("geo location error or blocked");
       // triggerZipInput()
+      getWeatherData("zip", {zip: "94596"});
+      return false;
     };
 
     navigator.geolocation.getCurrentPosition(success, error);
 
   }
 
-  function getWeatherByCoords(latitude, longitude) {
+  function getWeatherData(locationMethod, locationData) {
 
+    // set default API params
+    function APIParams() {
+        this.appid = "91e1db0bd8f7a77a2c6e3d7f4e34b73b";
+        this.units = "imperial";
+    }
+    var currentWeatherAPIParams = new APIParams(); // for calling http://openweathermap.org/current
+    var forecastWeatherAPIParams = new APIParams(); // for calling http://openweathermap.org/forecast5
+    forecastWeatherAPIParams.cnt = 8; // because we need all of the 3 hr blocks for the current day
+    // set location query params based on location method
+    if (locationMethod === "coordinates") {
+      currentWeatherAPIParams.lat = locationData.latitude;
+      currentWeatherAPIParams.lon = locationData.longitude;
+      forecastWeatherAPIParams.lat = locationData.latitude;
+      forecastWeatherAPIParams.lon = locationData.longitude;
+    } else if (locationMethod === "zip") {
+      currentWeatherAPIParams.zip = locationData.zip;
+      forecastWeatherAPIParams.zip = locationData.zip;
+    }
+    console.log(currentWeatherAPIParams);
     // cache the api response with the current weather conditions
-    var theWeatherNow = $.getJSON("http://api.openweathermap.org/data/2.5/weather", {
-      appid: "91e1db0bd8f7a77a2c6e3d7f4e34b73b",
-      lat: latitude,
-      lon: longitude,
-      units: "imperial"
-    });
+    var theWeatherNow = $.getJSON("http://api.openweathermap.org/data/2.5/weather", currentWeatherAPIParams);
     // cache the api response with the whole day's weather
-    var theWeatherForecast = $.getJSON("http://api.openweathermap.org/data/2.5/forecast", {
-      appid: "91e1db0bd8f7a77a2c6e3d7f4e34b73b",
-      lat: latitude,
-      lon: longitude,
-      units: "imperial",
-      cnt: 8 // because we need all of the 3 hr blocks for the current day
-    });
+    var theWeatherToday = $.getJSON("http://api.openweathermap.org/data/2.5/forecast", forecastWeatherAPIParams);
 
-    $.when(theWeatherNow, theWeatherForecast).done(function(current, forecast) {
+    $.when(theWeatherNow, theWeatherToday).done(function(current, forecast) {
       if (current[0].cod != "200" || forecast[0].cod != "200") {
         console.log("unable to communicate with open weather map api: " + current.cod);
         // triggerZipInput()
@@ -57,10 +69,6 @@ $(function(){
       populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts);
     });
 
-  }
-
-  function getWeatherByZip(data) {
-    // like `getWeatherByCoords()`, but with a zip code
   }
 
   function populateForecast(cityName, currentTemp, currentCondition, hourlyForecasts) {
