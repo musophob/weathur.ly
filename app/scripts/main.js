@@ -71,8 +71,65 @@ $(function(){
     $( "#forecast-temps td" ).each(function(i) {
       $(this).text(parseInt(hourlyForecasts[i].main.temp));
     });
-    $( "#forecast-icons td" ).each(function(i) {
-      $(this).text(hourlyForecasts[i].weather[0].icon);
+    $( "#forecast-icons td span" ).each(function(i) {
+      var apicon = hourlyForecasts[i].weather[0].icon;
+      switch (apicon) {
+        case "01d":
+          apicon = "B";
+          break;
+        case "01n":
+          apicon = "C";
+          break;
+        case "02d":
+          apicon = "H";
+          break;
+        case "02n":
+          apicon = "I";
+          break;
+        case "03d":
+          apicon = "N";
+          break;
+        case "03n":
+          apicon = "N";
+          break;
+        case "04d":
+          apicon = "Y";
+          break;
+        case "04n":
+          apicon = "Y";
+          break;
+        case "09d":
+          apicon = "Q";
+          break;
+        case "09n":
+          apicon = "Q";
+          break;
+        case "10d":
+          apicon = "R";
+          break;
+        case "10n":
+          apicon = "R";
+          break;
+        case "11d":
+          apicon = "0";
+          break;
+        case "11n":
+          apicon = "0";
+          break;
+        case "13d":
+          apicon = "W";
+          break;
+        case "13n":
+          apicon = "W";
+          break;
+        case "50d":
+          apicon = "J";
+          break;
+        case "50n":
+          apicon = "K";
+          break;
+      }
+      $(this).attr("data-icon", apicon);
     });
     $('#updated').text(new Date());
   }
