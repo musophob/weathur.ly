@@ -163,11 +163,27 @@ $(function(){
     showZipInput();
   })
 
-  $('#location-needed form').submit(function(e) {
-    e.preventDefault();
-    // this should be done only if zip is valid:
-    getForecast($('#zip').val());
-  });
+  $("#location-needed form").validate({
+      rules: {
+        zip: {
+          required: true,
+          digits: true,
+          minlength: 5,
+          maxlength: 5
+        }
+      },
+      messages: {
+        zip: {
+          required: "We need your zip code because geolocation is available",
+          minlength: "Please enter a valid zip code"
+        }
+      },
+      submitHandler: function(form, e) {
+        e.preventDefault();
+        getForecast($('#zip').val());
+      }
+    });
+
 
   $("#sms-form").validate({
       rules: {
