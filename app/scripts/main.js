@@ -13,7 +13,6 @@ $(function(){
       showPopulatedMarkup();
       return false;
     } else if (!navigator.geolocation){
-      console.log("we don't have geo location");
       showZipInput()
       return false;
     }
@@ -21,12 +20,10 @@ $(function(){
     function success(position) {
       var latitude  = position.coords.latitude;
       var longitude = position.coords.longitude;
-      console.log(latitude + " " + longitude)
       getWeatherData("coordinates", {"latitude": latitude, "longitude": longitude});
     };
 
     function error() {
-      console.log("geo location error or blocked");
       showZipInput()
       return false;
     };
@@ -55,7 +52,6 @@ $(function(){
       currentWeatherAPIParams.zip = locationData.zip;
       forecastWeatherAPIParams.zip = locationData.zip;
     }
-    console.log(currentWeatherAPIParams);
     // cache the api response with the current weather conditions
     var theWeatherNow = $.getJSON("http://api.openweathermap.org/data/2.5/weather", currentWeatherAPIParams);
     // cache the api response with the whole day's weather
@@ -63,12 +59,9 @@ $(function(){
 
     $.when(theWeatherNow, theWeatherToday).done(function(current, forecast) {
       if (current[0].cod != "200" || forecast[0].cod != "200") {
-        console.log("unable to communicate with open weather map api: " + current.cod);
         showZipInput()
         return false;
       }
-      console.log(current[0]);
-      console.log(forecast[0]);
       var cityName = current[0].name;
       var currentTemp = parseInt(current[0].main.temp);
       var currentCondition = current[0].weather[0].description;
