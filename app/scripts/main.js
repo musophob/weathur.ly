@@ -169,6 +169,25 @@ $(function(){
     getForecast($('#zip').val());
   });
 
+  $("#sms-form").validate({
+      rules: {
+        phone: {
+          required: true,
+          phoneUS: true
+        }
+      },
+      messages: {
+        phone: {
+          required: "We need your phone number to send you SMS alerts",
+          phoneUS: "Please enter a valid U.S. phone number"
+        }
+      },
+      submitHandler: function(form, e) {
+        e.preventDefault();
+        console.log($('#phone').val());
+      }
+    });
+
 
   getForecast();
 });
